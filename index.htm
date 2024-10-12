@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Monitoring - Signalement de Problèmes</title>
+<script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "c5a5ccfbce1ffe07453f152e3154f23c55418b72",
+        authDomain: "monitoring.googleapis.com",
+        projectId: "monitoring-3509b",
+        storageBucket: "monitoring.appspot.com",
+        messagingSenderId: "84113342906",
+        appId: "QuSDwgmIGQvKfqmjtPBzhUe3GW63naOgVdwvskevkr0"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+</script>
+</head>
+<body>
+    <header>
+        <h1>Monitoring</h1>
+        <img src="logo.png" alt="Logo Monitoring" class="logo">
+    </header>
+    <main>
+        <h2>Signalez un Problème</h2>
+        <form id="reportForm">
+            <label for="problemType">Type de Problème :</label>
+            <select id="problemType" name="problemType" required>
+                <option value="dechets">Présence de Déchets</option>
+                <option value="poubelles">Poubelles Débordées</option>
+                <option value="stagnation">Stagnation d'Eau</option>
+                <option value="graffiti">Graffiti</option>
+                <option value="luminaire">Luminaire Éteint</option>
+                <option value="trou">Trou dans la Route</option>
+                <option value="nuisances">Nuisances Sonores</option>
+                <option value="odeur">Odeur Désagréable</option>
+                <option value="sdf">Situation de SDF</option>
+                <option value="animal">Animal Errant</option>
+                <option value="plantation">Plantation Abandonnée</option>
+                <option value="route">Route Bloquée</option>
+                <option value="signalisation">Manque de Signalisation</option>
+                <option value="inondation">Inondation</option>
+                <option value="batiment">Bâtiment Abandonné</option>
+                <option value="panneau">Panneau Routier Détérioré</option>
+                <option value="incendie">Incendie</option>
+                <option value="mouvement">Mouvement Suspect</option>
+                <option value="autre">Autre</option>
+            </select>
+
+            <label for="description">Description :</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="location">Emplacement :</label>
+            <input type="text" id="location" name="location" required>
+            <button type="button" id="getLocation">Obtenir ma Position</button>
+
+            <label for="photo">Télécharger une Photo :</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+
+            <button type="submit">Soumettre</button>
+        </form>
+
+        <h2>Carte Interactive</h2>
+        <div id="map"></div> <!-- Le div pour la carte -->
+    </main>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="script.js"></script>
+</body>
+</html>
