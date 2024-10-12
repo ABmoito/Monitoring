@@ -1,12 +1,12 @@
 // script.js
 
 // Initialiser la carte Mapbox
-mapboxgl.accessToken = 'VOTRE_ACCESS_TOKEN_MAPBOX'; // Remplacez par votre access token Mapbox
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWhpamFiIiwiYSI6ImNtMjU2d2I5NjBvdmoydnF3Y25zcmVlMWcifQ.tG8-kMUEkhX664eTWvjpGQ'; // Remplacez par votre access token Mapbox
 
 const map = new mapboxgl.Map({
     container: 'map', // ID du div dans lequel la carte sera affichée
     style: 'mapbox://styles/mapbox/streets-v11', // Style de la carte
-    center: [longitude, latitude], // Coordonnées initiales (remplacez par une valeur par défaut)
+    center: [0, 0], // Coordonnées initiales (remplacez par une valeur par défaut)
     zoom: 12 // Niveau de zoom initial
 });
 
