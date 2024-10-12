@@ -1,0 +1,25 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $problemType = $_POST['problemType'];
+    $description = $_POST['description'];
+    $location = $_POST['location'];
+
+    // Gestion de l'image si elle est téléchargée
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
+        $photo = $_FILES['photo']['name'];
+        move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/' . $photo);
+    } else {
+        $photo = null; // Pas d'image envoyée
+    }
+
+    // Ici, vous pouvez ajouter votre code pour enregistrer ces informations dans la base de données
+    // Exemple avec PDO
+    // $pdo = new PDO('mysql:host=localhost;dbname=your_database', 'username', 'password');
+    // $stmt = $pdo->prepare('INSERT INTO reports (problem_type, description, location, photo) VALUES (?, ?, ?, ?)');
+    // $stmt->execute([$problemType, $description, $location, $photo]);
+
+    echo "Votre signalement a été envoyé avec succès !";
+} else {
+    echo "Méthode non autorisée.";
+}
+?>

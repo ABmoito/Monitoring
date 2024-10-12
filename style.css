@@ -1,0 +1,88 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Couleur de fond */
+}
+
+h1 {
+    text-align: center;
+    color: #333; /* Couleur du titre h1 */
+    font-size: 3em; /* Taille du texte h1 (ajustez comme nécessaire) */
+    transition: transform 0.3s ease, color 0.3s ease; /* Transition douce pour l'animation */
+}
+
+h1:hover {
+    transform: scale(1.1); /* Effet d'agrandissement au survol */
+    color: #007bff; /* Changement de couleur au survol */
+}
+
+h2 {
+    text-align: center;
+    color: #007bff; /* Couleur du titre h2 */
+    font-weight: normal; /* Pas de gras */
+    font-size: 1.1em; /* Taille du texte h2 (ajustez comme nécessaire) */
+}
+
+form {
+    max-width: 600px; /* Largeur maximale du formulaire */
+    margin: 20px auto; /* Centre le formulaire */
+    padding: 20px;
+    background: white; /* Couleur de fond du formulaire */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre pour le formulaire */
+}
+
+label {
+    display: block; /* Affichage en bloc */
+    margin: 10px 0 5px; /* Espacement des étiquettes */
+    color: #555; /* Couleur des étiquettes */
+}
+
+select, textarea, input[type="text"], input[type="file"] {
+    width: 100%; /* Largeur pleine */
+    padding: 10px; /* Espacement interne */
+    border: 1px solid #ccc; /* Bordure grise */
+    border-radius: 4px; /* Coins arrondis */
+    margin-bottom: 15px; /* Espacement en bas */
+}
+
+textarea {
+    height: 100px; /* Hauteur fixe pour le texte */
+}
+
+button {
+    padding: 10px 20px; /* Espacement interne */
+    background-color: #007bff; /* Couleur de fond des boutons */
+    color: white; /* Couleur du texte des boutons */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur de pointeur */
+    transition: background-color 0.3s ease; /* Transition douce */
+}
+
+button:hover {
+    background-color: #0056b3; /* Couleur au survol */
+}
+
+#map {
+    height: 400px; /* Hauteur de la carte */
+    margin-top: 20px; /* Espacement au-dessus de la carte */
+    border: 1px solid #ccc; /* Bordure autour de la carte */
+    border-radius: 4px; /* Coins arrondis pour la carte */
+}
+
+#carte {
+    margin: 20px; /* Espacement autour de la section de la carte */
+    background: white; /* Couleur de fond de la section de la carte */
+    padding: 15px; /* Espacement interne */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre pour la section de la carte */
+}
+
+/* CSS pour le logo */
+.logo {
+    max-width: 150px; /* Ajustez la taille selon vos préférences, par exemple 150px */
+    height: auto; /* Garde les proportions */
+    display: block; /* Centre le logo */
+    margin: 0 auto; /* Centre le logo horizontalement */
