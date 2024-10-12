@@ -4,32 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Monitoring - Signalement de Problèmes</title>
-<script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>
-<script>
-    const firebaseConfig = {
-        apiKey: "c5a5ccfbce1ffe07453f152e3154f23c55418b72",
-        authDomain: "monitoring.googleapis.com",
-        projectId: "monitoring-3509b",
-        storageBucket: "monitoring.appspot.com",
-        messagingSenderId: "84113342906",
-        appId: "QuSDwgmIGQvKfqmjtPBzhUe3GW63naOgVdwvskevkr0"
-    };
+    <title>Monitoring - Alerte territoriale - Signalez un Problème</title>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "c5a5ccfbce1ffe07453f152e3154f23c55418b72",
+            authDomain: "monitoring.googleapis.com",
+            projectId: "monitoring-3509b",
+            storageBucket: "monitoring.appspot.com",
+            messagingSenderId: "84113342906",
+            appId: "QuSDwgmIGQvKfqmjtPBzhUe3GW63naOgVdwvskevkr0"
+        };
 
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-</script>
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Fonction pour afficher le message de remerciement
+        function showThankYouMessage() {
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            thankYouMessage.style.display = 'block'; // Affiche le message
+        }
+    </script>
+    <style>
+        /* CSS pour le logo */
+        .logo {
+            max-width: 100px; /* Réduisez la largeur maximale selon vos besoins */
+            height: auto; /* Garde les proportions */
+            display: block; /* Centre le logo */
+            margin: 0 auto; /* Centre le logo horizontalement */
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9; /* Couleur de fond */
+        }
+
+        header {
+            text-align: center;
+            padding: 20px; /* Espacement autour du header */
+        }
+
+        main {
+            padding: 20px; /* Espacement autour du main */
+        }
+
+        h2 {
+            margin-top: 30px; /* Espacement avant les sous-titres */
+        }
+
+        /* Styles supplémentaires pour le formulaire et la carte */
+        #thankYouMessage {
+            display: none; /* Masque le message par défaut */
+            margin-top: 20px; /* Ajoute un espacement au-dessus du message */
+            padding: 10px; /* Espacement à l'intérieur du message */
+            background-color: #dff0d8; /* Couleur de fond pour le message */
+            color: #3c763d; /* Couleur du texte */
+            border: 1px solid #d6e9c6; /* Bordure */
+            border-radius: 4px; /* Coins arrondis */
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Monitoring</h1>
-        <img src="logo.png" alt="Logo Monitoring" class="logo">
+        <img src="logo.png" alt="Logo Monitoring" class="logo"> <!-- Logo avec classe -->
     </header>
     <main>
-        <h2>Signalez un Problème</h2>
-        <form id="reportForm">
+        <h2>Alerte territoriale : signalez les problèmes que vous observez</h2>
+        <form id="reportForm" onsubmit="event.preventDefault(); showThankYouMessage();">
             <label for="problemType">Type de Problème :</label>
             <select id="problemType" name="problemType" required>
                 <option value="dechets">Présence de Déchets</option>
@@ -65,6 +111,8 @@
 
             <button type="submit">Soumettre</button>
         </form>
+
+        <div id="thankYouMessage">Merci pour votre contribution !</div> <!-- Message de remerciement -->
 
         <h2>Carte Interactive</h2>
         <div id="map"></div> <!-- Le div pour la carte -->
