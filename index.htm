@@ -26,6 +26,19 @@
             const thankYouMessage = document.getElementById('thankYouMessage');
             thankYouMessage.style.display = 'block'; // Affiche le message
         }
+        // Fonction pour obtenir la position de l'utilisateur
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const locationInput = document.getElementById('location');
+                    locationInput.value = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+                }, function() {
+                    alert('Erreur lors de la récupération de la position.');
+                });
+            } else {
+                alert('La géolocalisation n\'est pas supportée par ce navigateur.');
+            }
+        }
     </script>
     <style>
         /* CSS pour le logo */
