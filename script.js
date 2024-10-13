@@ -1,4 +1,4 @@
-// Initialiser la carte Mapbox
+// Initialiser la carte Mapbox 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWhpamFiIiwiYSI6ImNtMjU2d2I5NjBvdmoydnF3Y25zcmVlMWcifQ.tG8-kMUEkhX664eTWvjpGQ'; // Remplacez par votre access token Mapbox
 
 const map = new mapboxgl.Map({
@@ -19,6 +19,22 @@ const geolocate = new mapboxgl.GeolocateControl({
     trackUserLocation: true
 });
 map.addControl(geolocate);
+
+// Variable pour gérer les points
+let points = 0;
+
+// Fonction pour ajouter 2 points par contribution
+function ajouterPoints() {
+    points += 2;
+
+    // Calculer les points restants pour atteindre 1000
+    const pointsRestants = 1000 - points;
+
+    // Afficher les points dans la console ou mettre à jour un élément HTML
+    console.log(`Vous avez reçu 2 points. Total des points : ${points}`);
+    document.getElementById('pointsEarned').textContent = `Vous avez reçu ${points} points pour vos contributions !`;
+    document.getElementById('pointsToCoupon').textContent = `Il vous reste ${pointsRestants} points pour obtenir un coupon d'achat !`;
+}
 
 // Lorsque l'utilisateur clique sur le bouton de localisation
 geolocate.on('geolocate', function(event) {
@@ -73,4 +89,16 @@ map.on('click', function(e) {
 
     // Remplir le champ d'emplacement avec les coordonnées du clic
     document.getElementById('location').value = `Lat: ${coordinates.lat}, Lng: ${coordinates.lng}`;
+});
+
+// Lorsque l'utilisateur soumet une contribution
+document.getElementById('reportForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Ajouter 2 points pour chaque contribution soumise
+    ajouterPoints();
+
+    // Afficher un message de remerciement
+    const thankYouMessage = document.getElementById('thankYouMessage');
+    thankYouMessage.style.display = 'block';
 });
