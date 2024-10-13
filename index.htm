@@ -14,83 +14,109 @@
             projectId: "monitoring-3509b",
             storageBucket: "monitoring.appspot.com",
             messagingSenderId: "84113342906",
-            appId: "QuSDwgmIGQvKfqmjtPBzhUe3GW63naOgVdwvskevkr0"
+            appId: "1:84113342906:web:90a22e549467173b191d83"
         };
 
-        // Initialize Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // Fonction pour afficher le message de remerciement
         function showThankYouMessage() {
             const thankYouMessage = document.getElementById('thankYouMessage');
-            thankYouMessage.style.display = 'block'; // Affiche le message
+            thankYouMessage.style.display = 'block';
         }
-        // Fonction pour obtenir la position de l'utilisateur
+
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const locationInput = document.getElementById('location');
-                    locationInput.value = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
-                }, function() {
-                    alert('Erreur lors de la récupération de la position.');
-                });
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
             } else {
-                alert('La géolocalisation n\'est pas supportée par ce navigateur.');
+                alert("La géolocalisation n'est pas supportée par ce navigateur.");
             }
         }
+
+        function showPosition(position) {
+            const locationInput = document.getElementById('location');
+            locationInput.value = "Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude;
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("Permission de géolocalisation refusée.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("La position est indisponible.");
+                    break;
+                case error.TIMEOUT:
+                    alert("La demande de géolocalisation a expiré.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("Une erreur inconnue s'est produite.");
+                    break;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('getLocation').addEventListener('click', getLocation);
+            document.getElementById('reportForm').addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                // Affichage de 2 points pour chaque contribution
+                const points = 2;
+                document.getElementById('pointsEarned').textContent = `Vous avez reçu ${points} points pour chaque contribution soumise !`;
+                showThankYouMessage();
+            });
+        });
     </script>
     <style>
-        /* CSS pour le logo */
         .logo {
-            max-width: 100px; /* Réduisez la largeur maximale selon vos besoins */
-            height: auto; /* Garde les proportions */
-            display: block; /* Centre le logo */
-            margin: 0 auto; /* Centre le logo horizontalement */
+            max-width: 100px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         body {
             font-family: 'Open Sans', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9; /* Couleur de fond */
+            background-color: #f9f9f9;
         }
 
         header {
             text-align: center;
-            padding: 20px; /* Espacement autour du header */
+            padding: 20px;
         }
 
         main {
-            padding: 20px; /* Espacement autour du main */
+            padding: 20px;
         }
 
         h2 {
-            margin-top: 30px; /* Espacement avant les sous-titres */
+            margin-top: 30px;
         }
 
-        /* Styles supplémentaires pour le formulaire et la carte */
         #thankYouMessage {
-            display: none; /* Masque le message par défaut */
-            margin-top: 20px; /* Ajoute un espacement au-dessus du message */
-            padding: 10px; /* Espacement à l'intérieur du message */
-            background-color: #dff0d8; /* Couleur de fond pour le message */
-            color: #3c763d; /* Couleur du texte */
-            border: 1px solid #d6e9c6; /* Bordure */
-            border-radius: 4px; /* Coins arrondis */
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Monitoring</h1>
-        <img src="logo.png" alt="Logo Monitoring" class="logo"> <!-- Logo avec classe -->
+        <img src="logo.png" alt="Logo Monitoring" class="logo">
     </header>
     <main>
         <h2>Alerte territoriale : signalez les problèmes que vous observez</h2>
-        <form id="reportForm" onsubmit="event.preventDefault(); showThankYouMessage();">
+        <form id="reportForm">
             <label for="problemType">Type de Problème :</label>
             <select id="problemType" name="problemType" required>
+                <!-- Options de problèmes -->
                 <option value="dechets">Présence de Déchets</option>
                 <option value="poubelles">Poubelles Débordées</option>
                 <option value="stagnation">Stagnation d'Eau</option>
@@ -125,10 +151,12 @@
             <button type="submit">Soumettre</button>
         </form>
 
-        <div id="thankYouMessage">Merci pour votre contribution !</div> <!-- Message de remerciement -->
+        <div id="thankYouMessage">
+            Merci pour votre contribution ! <span id="pointsEarned"></span>
+        </div>
 
         <h2>Carte Interactive</h2>
-        <div id="map"></div> <!-- Le div pour la carte -->
+        <div id="map"></div>
     </main>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
